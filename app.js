@@ -7,7 +7,9 @@ app.engine('html', swig.renderFile)
 app.set('view engine','html')
 app.set('views', __dirname + '/views')
 
-
+// ??? Caching Do we need both lines?
+//app.set('view cache', false);
+swig.setDefaults({ cache: false });
 
 app.use('/', function(req,res, next) {
 	console.log('you asked for:' + req.method + req.path)
@@ -23,7 +25,8 @@ app.use('/special', function(req,res, next) {
 })
 
 app.get('/', function(req, res, next) {
-	res.send("Welcome!");
+	var people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
+	res.render( 'index', {title: 'Hall of Fame', people: people} );
 
 })
 
