@@ -28,11 +28,11 @@ var getFakeName = function() {
 };
 
 var getFakeTweet = function() {
-  var awesome_adj = ['awesome', 'breathtaking', 'amazing', 'funny', 'sweet', 'cool', 'wonderful', 'mindblowing'];
+  var awesome_adj = ['red', 'blue', 'green', 'yellow', 'pink', 'orange', 'purple', 'grey'];
   return "Fullstack Academy is " + randArrayEl(awesome_adj) + "! The instructors are just so " + randArrayEl(awesome_adj) + ". #fullstacklove #codedreams";
 };
 
-for (var i = 0; i < 5; i++) {
+for (var i = 0; i < 10; i++) {
   module.exports.add( getFakeName(), getFakeTweet() );
 }
 
