@@ -12,5 +12,19 @@ router.get('stylesheets/style.css', function(req,res) {
 	res.sendFile('../public/stylesheets/style.css');
 });
 
+router.get('/users/:name', function(req, res) {
+  var name = req.params.name;
+  var list = tweetBank.find( {name: name} );
+  res.render( 'index', { title: 'Twitter.js - Posts by ', name, tweets: list } );
+});
+
+router.get('/tweets/:id', function(req, res) {
+  var uniqueID = parseInt(req.params.id);
+
+  //console.log("unique ID is ",uniqueID);
+  var tweet = tweetBank.find( { unique_id: uniqueID } );
+  console.log("tweet is",tweet,"and tweet length is",tweet.length);
+  res.render('index', { title: 'Single Tweet', tweets: tweet });
+});
 
 module.exports = router;

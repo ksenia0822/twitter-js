@@ -3,7 +3,7 @@ var _ = require('lodash');
 var data = [];
 
 function add (name, text) {
-  data.push({ name: name, text: text });
+  data.push({ name: name, text: text , unique_id: (data.length + 1)});
 }
 
 function list () {
@@ -32,13 +32,15 @@ var getFakeTweet = function() {
   return "Fullstack Academy is " + randArrayEl(awesome_adj) + "! The instructors are just so " + randArrayEl(awesome_adj) + ". #fullstacklove #codedreams";
 };
 
-for (var i = 0; i < 10; i++) {
+for (var i = 0; i < 5; i++) {
   module.exports.add( getFakeName(), getFakeTweet() );
 }
 
+module.exports.add("Shanna Gregory","Welcome to Grace Hopper Academy!");
 module.exports.add("Grace Hopper","I love to code");
 
-//console.log(data);
-console.log("results of find",module.exports.find({name:'Grace Hopper'}));
+console.log(data);
+//console.log("results of find",module.exports.find({name:'Grace Hopper'}));
+console.log("results of finding by ID",module.exports.find({unique_id: 4})[0].text);
 
 //console.log("results of list",module.exports.list());

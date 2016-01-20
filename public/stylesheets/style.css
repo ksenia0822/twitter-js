@@ -57,3 +57,13 @@ code {
 .content .by {
   font-weight: bold;
 }
+.tweet {
+  margin: 20px 0px;
+}
+li.tweet {
+  list-style-type: none;
+}
+.name {
+  font-weight: bold;
+  color: black;
+}
