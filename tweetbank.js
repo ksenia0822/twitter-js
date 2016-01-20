@@ -39,8 +39,3 @@ for (var i = 0; i < 5; i++) {
 module.exports.add("Shanna Gregory","Welcome to Grace Hopper Academy!");
 module.exports.add("Grace Hopper","I love to code");
 
-console.log(data);
-//console.log("results of find",module.exports.find({name:'Grace Hopper'}));
-console.log("results of finding by ID",module.exports.find({unique_id: 4})[0].text);
-
-//console.log("results of list",module.exports.list());

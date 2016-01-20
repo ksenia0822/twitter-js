@@ -1,6 +1,7 @@
 var express = require( 'express' );
 var swig = require( 'swig' );
 var app = express(); // creates an instance of an express application
+// var bodyParser = require('body-parser');
 
 var routes = require('./routes/');
 
@@ -9,6 +10,12 @@ app.use('/', routes);
 app.engine('html', swig.renderFile)
 app.set('view engine','html')
 app.set('views', __dirname + '/views')
+
+// // parse application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({ extended: false }))
+
+// // parse application/json
+// app.use(bodyParser.json())
 
 
 swig.setDefaults({ cache: false });
