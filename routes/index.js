@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
-// could use one line instead: var router = require('express').Router();
+// could we use one line instead: var router = require('express').Router();
 var tweetBank = require('../tweetBank');
-
 var bodyParser = require('body-parser');
 // parse application/x-www-form-urlencoded
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -10,35 +9,54 @@ router.use(bodyParser.urlencoded({ extended: false }))
 router.use(bodyParser.json())
 
 
-router.get('/', function (req, res) {
-  var tweets = tweetBank.list();
-  res.render( 'index', { title: 'Twitter.js', tweets: tweets, showForm: true  } );
-});
+module.exports = function (io) {
 
-router.get('stylesheets/style.css', function(req,res) {
-	res.sendFile('../public/stylesheets/style.css');
-});
+  router.get('/', function (req, res) {
+    var tweets = tweetBank.list();
+    res.render( 'index', { title: 'Twitter.js', tweets: tweets, showForm: true  } );
+  });
 
-router.get('/users/:name', function(req, res) {
-  var name = req.params.name;
-  var list = tweetBank.find( {name: name} );
-  res.render( 'index', { title: 'Twitter.js - Posts by ', name, tweets: list,showForm: false } );
-});
+  //??? Part 7.5 I don't really understand what this router does. Do we still need to use it if we use express.static?
+  // router.get('stylesheets/style.css', function(req,res) {
+  // 	res.sendFile('../public/stylesheets/style.css');
+  // });
 
-router.get('/tweets/:id', function(req, res) {
-  var uniqueID = parseInt(req.params.id);
-  //console.log("unique ID is ",uniqueID);
-  var tweet = tweetBank.find( { unique_id: uniqueID } );
-  // console.log("tweet is",tweet,"and tweet length is",tweet.length);
-  res.render('index', { title: 'Single Tweet', tweets: tweet });
-});
+  router.get('/users/:name', function(req, res) {
+    var name = req.params.name;
+    var list = tweetBank.find( {name: name} );
+    res.render( 'index', { title: 'Twitter.js - Posts by ' + name, tweets: list, showForm: true } );
+  });
 
-router.post('/tweets', function(req, res) {
-  var name = req.body.name;
-  var text = req.body.text;
-  console.log('name is: ', name, 'text is: ', text)
-  tweetBank.add(name, text);
-  res.redirect('/');
-});
+  router.get('/tweets/:id', function(req, res) {
+    var uniqueID = parseInt(req.params.id);
+    var tweet = tweetBank.find( { unique_id: uniqueID } );
+    res.render('index', { title: 'Single Tweet', tweets: tweet });
+  });
 
-module.exports = router;
+  router.post('/tweets', function(req, res) {
+    var name = req.body.name;
+    var text = req.body.text;
+    tweetBank.add(name, text);
+    res.redirect('/');
+  });
+
+  // module.exports = router;
+
+
+    // ...
+    // route definitions, etc.
+    // ...
+  return router;
+};
+
+
+
+
+
+
+
+
+
+
+
+

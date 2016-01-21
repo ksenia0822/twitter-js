@@ -36,6 +36,3 @@ for (var i = 0; i < 5; i++) {
   module.exports.add( getFakeName(), getFakeTweet() );
 }
 
-module.exports.add("Shanna Gregory","Welcome to Grace Hopper Academy!");
-module.exports.add("Grace Hopper","I love to code");
-
