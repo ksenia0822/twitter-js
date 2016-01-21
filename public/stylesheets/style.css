@@ -57,6 +57,10 @@ code {
 .content .by {
   font-weight: bold;
 }
+ul#all-tweets {
+  margin-left: 0;
+  padding-left: 0;
+}
 .tweet {
   margin: 20px 0px;
 }
