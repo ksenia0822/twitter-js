@@ -11,7 +11,7 @@ var routes = require('./routes/');
 // Before implementing Socket.io
 // app.use('/', routes);
 // After implementing Socket.io
-app.use( '/', routes(io) );
+
 
 app.engine('html', swig.renderFile)
 app.set('view engine','html')
@@ -24,5 +24,7 @@ app.use(express.static('public'));
 var server = app.listen(3000, function() {
 	console.log("Listening to the port 3000");
 });
-// var server = app.listen(3000);
+
 var io = socketio.listen(server);
+
+app.use( '/', routes(io) );
