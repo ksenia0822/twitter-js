@@ -19,17 +19,16 @@
       {% endfor %}
 
       {% if showForm %}
-        {% for tweet in tweets %} 
           <form action="/tweets" method="POST">
             <label for="name_field">Name:</label>
             <!-- ??? Populate name field instead of hiding the table in user route-->
-            <input name="name" value='{{tweet.name}}' type="text" id="name_field" />
-            
+            <input name="name" value='{{namevalue}}' type="text" id="name_field" />
+
             <label for="text_field">Text:</label>
             <input name="text" type="text" id="text_field" style="width: 350px;" />
             <input type="submit" value="Submit" />
           </form>
-        {% endfor %}
+
       {% endif %}
       
     </div>

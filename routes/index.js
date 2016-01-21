@@ -8,6 +8,7 @@ router.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 router.use(bodyParser.json())
 
+var socketio = require('socket.io');
 
 module.exports = function (io) {
 
@@ -24,7 +25,7 @@ module.exports = function (io) {
   router.get('/users/:name', function(req, res) {
     var name = req.params.name;
     var list = tweetBank.find( {name: name} );
-    res.render( 'index', { title: 'Twitter.js - Posts by ' + name, tweets: list, showForm: true } );
+    res.render( 'index', { title: 'Twitter.js - Posts by ' + name, namevalue: name, tweets: list, showForm: true } );
   });
 
   router.get('/tweets/:id', function(req, res) {
@@ -38,14 +39,11 @@ module.exports = function (io) {
     var text = req.body.text;
     tweetBank.add(name, text);
     res.redirect('/');
+
+    io.sockets.emit('new_tweet', { name: name, text: text });
+
   });
 
-  // module.exports = router;
-
-
-    // ...
-    // route definitions, etc.
-    // ...
   return router;
 };
 
